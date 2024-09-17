@@ -7,6 +7,7 @@ import com.jetbrains.kmpapp.data.MuseumApi
 import com.jetbrains.kmpapp.data.MuseumRepository
 import com.jetbrains.kmpapp.data.MuseumStorage
 import com.jetbrains.kmpapp.native.PlatformComponent
+import com.jetbrains.kmpapp.other.native.OtherPlatformComponent
 import com.jetbrains.kmpapp.screens.detail.DetailViewModel
 import com.jetbrains.kmpapp.screens.list.ListViewModel
 import io.ktor.client.HttpClient
@@ -43,7 +44,7 @@ class DataModule {
 @ComponentScan("com.jetbrains.kmpapp.screens")
 class ViewModelModule
 
-@Module(includes = [DataModule::class,ViewModelModule::class, NativeModule::class])
+@Module(includes = [DataModule::class,ViewModelModule::class, NativeModule::class, OtherNativeModule::class])
 class AppModule
 
 @Module
@@ -61,4 +62,7 @@ fun initKoin(config : KoinAppDeclaration ?= null) {
 
     val idGen = KoinPlatform.getKoin().get<IdGenerator> { parametersOf("_prefix_") }.generate()
     println("Id => $idGen")
+
+    val goodbye = KoinPlatform.getKoin().get<OtherPlatformComponent>().sayGoodBye()
+    println(goodbye)
 }
