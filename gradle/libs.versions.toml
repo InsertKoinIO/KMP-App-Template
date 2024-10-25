@@ -1,16 +1,16 @@
 [versions]
 agp = "8.2.2"
-androidx-activityCompose = "1.9.0"
-androidx-ui-tooling = "1.6.7"
-compose-plugin = "1.6.10-rc03"
+androidx-activityCompose = "1.9.3"
+androidx-ui-tooling = "1.7.4"
+compose-plugin = "1.7.0"
 kamel = "0.9.4"
-koin = "3.6.0-Beta5"
-koin-compose = "1.2.0-Beta5"
-koin-annotations = "1.4.0"
-kotlin = "1.9.23"
-ktor = "2.3.10"
-navigationCompose = "2.7.0-alpha06"
-ksp = "1.9.23-1.0.20"
+koin = "4.0.0"
+koin-compose = "4.0.0"
+koin-annotations = "2.0.0-Beta1"
+kotlin = "2.0.21"
+ktor = "2.3.12"
+navigationCompose = "2.7.0-alpha07"
+ksp = "2.0.21-1.0.25"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -33,5 +33,6 @@ koin-ksp-compiler = {module = "io.insert-koin:koin-ksp-compiler", version.ref = 
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

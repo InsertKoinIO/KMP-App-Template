@@ -47,7 +47,7 @@ class ViewModelModule
 class AppModule
 
 @Module
-expect class NativeModule
+expect class NativeModule()
 
 fun initKoin(config : KoinAppDeclaration ?= null) {
     startKoin {
