@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinComposeCompiler)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.ksp)
+//    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -54,37 +54,38 @@ kotlin {
             implementation(libs.kamel)
             implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
-            api(libs.koin.annotations)
+            implementation(libs.koin.compose.viewmodel.nav)
+//            api(libs.koin.annotations)
             implementation(libs.navigation.compose)
         }
     }
 
-    // KSP Common sourceSet
-    sourceSets.named("commonMain").configure {
-        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-    }
+//    // KSP Common sourceSet
+//    sourceSets.named("commonMain").configure {
+//        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+//    }
 }
 
-// KSP Tasks
-dependencies {
-    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
-    add("kspAndroid", libs.koin.ksp.compiler)
-    add("kspIosX64", libs.koin.ksp.compiler)
-    add("kspIosArm64", libs.koin.ksp.compiler)
-    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
-}
-
-// KSP Metadata Trigger
-project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
-    if(name != "kspCommonMainKotlinMetadata") {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
-}
-
-ksp {
-    arg("KOIN_USE_COMPOSE_VIEWMODEL","true")
-    arg("KOIN_CONFIG_CHECK","true")
-}
+//// KSP Tasks
+//dependencies {
+//    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+//    add("kspAndroid", libs.koin.ksp.compiler)
+//    add("kspIosX64", libs.koin.ksp.compiler)
+//    add("kspIosArm64", libs.koin.ksp.compiler)
+//    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+//}
+//
+//// KSP Metadata Trigger
+//project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+//    if(name != "kspCommonMainKotlinMetadata") {
+//        dependsOn("kspCommonMainKotlinMetadata")
+//    }
+//}
+//
+//ksp {
+//    arg("KOIN_USE_COMPOSE_VIEWMODEL","true")
+//    arg("KOIN_CONFIG_CHECK","true")
+//}
 
 android {
     namespace = "com.jetbrains.kmpapp"

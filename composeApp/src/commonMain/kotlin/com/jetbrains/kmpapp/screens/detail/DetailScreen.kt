@@ -47,6 +47,7 @@ import kmp_app_template.composeapp.generated.resources.label_repository
 import kmp_app_template.composeapp.generated.resources.label_title
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinNavViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -54,10 +55,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun DetailScreen(
     navController: NavController,
     objectId: Int,
+    viewModel : DetailViewModel = koinViewModel()
 ) {
-    @OptIn(KoinExperimentalAPI::class)
-    val viewModel = koinViewModel<DetailViewModel>()
-
     val obj by viewModel.getObject(objectId).collectAsState(initial = null)
     AnimatedContent(obj != null) { objectAvailable ->
         if (objectAvailable) {

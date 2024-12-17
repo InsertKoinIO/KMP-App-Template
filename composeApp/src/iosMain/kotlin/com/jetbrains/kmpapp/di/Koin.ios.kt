@@ -1,8 +1,9 @@
 package com.jetbrains.kmpapp.di
 
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
+import com.jetbrains.kmpapp.native.PlatformComponent
+import org.koin.core.module.Module
+import org.koin.dsl.module
 
-@Module
-@ComponentScan("com.jetbrains.kmpapp.native")
-actual class NativeModule
+actual val nativeModule : Module = module {
+    single { PlatformComponent() }
+}

@@ -36,11 +36,10 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun ListScreen(
     navController: NavController,
+    viewModel : ListViewModel = koinViewModel()
 ) {
-    @OptIn(KoinExperimentalAPI::class)
-    val viewModel = koinViewModel<ListViewModel>()
+    println("screen - vm: $viewModel")
     val objects by viewModel.objects.collectAsState()
-
     AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
         if (objectsAvailable) {
             ObjectGrid(

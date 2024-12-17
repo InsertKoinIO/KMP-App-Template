@@ -3,7 +3,6 @@ package com.jetbrains.kmpapp.data
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
-import org.koin.core.annotation.Single
 
 interface MuseumStorage {
     suspend fun saveObjects(newObjects: List<MuseumObject>)
@@ -13,7 +12,6 @@ interface MuseumStorage {
     fun getObjects(): Flow<List<MuseumObject>>
 }
 
-@Single
 class InMemoryMuseumStorage : MuseumStorage {
     private val storedObjects = MutableStateFlow(emptyList<MuseumObject>())
 

@@ -14,45 +14,51 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.koin.core.annotation.ComponentScan
-import org.koin.core.annotation.Module
-import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.KoinAppDeclaration
-import org.koin.ksp.generated.*
+import org.koin.dsl.bind
+import org.koin.dsl.module
 import org.koin.mp.KoinPlatform
 
-@Module
-@ComponentScan("com.jetbrains.kmpapp.data")
-class DataModule {
 
-    @Single
-    fun json() = Json { ignoreUnknownKeys = true }
-
-    @Single
-    fun httpClient(json : Json) = HttpClient {
-        install(ContentNegotiation) {
-            // TODO Fix API so it serves application/json
-            json(json, contentType = ContentType.Any)
+val dataModule = module {
+    single { Json { ignoreUnknownKeys = true } }
+    single {
+        HttpClient {
+            install(ContentNegotiation) {
+                // TODO Fix API so it serves application/json
+                json(get(), contentType = ContentType.Any)
+            }
         }
     }
+    singleOf(::IdGenerator)
+    singleOf(::KtorMuseumApi) bind MuseumApi::class
+    singleOf(::MuseumRepository)
+    singleOf(::InMemoryMuseumStorage) bind MuseumStorage::class
 }
 
-@Module
-@ComponentScan("com.jetbrains.kmpapp.screens")
-class ViewModelModule
+val viewModels = module {
+    viewModelOf(::DetailViewModel)
+    viewModelOf(::ListViewModel)
+}
 
-@Module(includes = [DataModule::class,ViewModelModule::class, NativeModule::class])
-class AppModule
+val appModule = module {
+    includes(dataModule, viewModels, nativeModule)
+}
 
-@Module
-expect class NativeModule()
+//@Module(includes = [DataModule::class,ViewModelModule::class, NativeModule::class])
+//class AppModule
 
-fun initKoin(config : KoinAppDeclaration ?= null) {
+expect val nativeModule: Module
+
+fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
         modules(
-            AppModule().module,
+            appModule,
         )
         config?.invoke(this)
     }

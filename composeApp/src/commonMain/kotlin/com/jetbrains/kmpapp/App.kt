@@ -8,6 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import com.jetbrains.kmpapp.screens.list.ListScreen
+import com.jetbrains.kmpapp.screens.list.ListViewModel
+import org.koin.compose.viewmodel.koinNavViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun App() {
@@ -17,7 +20,7 @@ fun App() {
             navController,
             startDestination = "list"
         ) {
-            composable("list") {
+            composable("list") { backStackEntry ->
                 ListScreen(navController)
             }
             composable("detail/{objectId}") { backStackEntry ->
