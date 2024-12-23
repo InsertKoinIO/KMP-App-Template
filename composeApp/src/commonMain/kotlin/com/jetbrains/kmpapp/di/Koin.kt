@@ -7,6 +7,7 @@ import com.jetbrains.kmpapp.data.MuseumApi
 import com.jetbrains.kmpapp.data.MuseumRepository
 import com.jetbrains.kmpapp.data.MuseumStorage
 import com.jetbrains.kmpapp.native.PlatformComponent
+import com.jetbrains.kmpapp.runExample
 import com.jetbrains.kmpapp.screens.detail.DetailViewModel
 import com.jetbrains.kmpapp.screens.list.ListViewModel
 import io.ktor.client.HttpClient
@@ -19,8 +20,10 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.KoinConfiguration
 import org.koin.dsl.bind
+import org.koin.dsl.includes
+import org.koin.dsl.koinConfiguration
 import org.koin.dsl.module
 import org.koin.mp.KoinPlatform
 
@@ -50,21 +53,19 @@ val appModule = module {
     includes(dataModule, viewModels, nativeModule)
 }
 
-//@Module(includes = [DataModule::class,ViewModelModule::class, NativeModule::class])
-//class AppModule
-
 expect val nativeModule: Module
 
-fun initKoin(config: KoinAppDeclaration? = null) {
-    startKoin {
-        modules(
-            appModule,
-        )
-        config?.invoke(this)
-    }
-    val hello = KoinPlatform.getKoin().get<PlatformComponent>().sayHello()
-    println(hello)
+//fun initKoin() {
+//    startKoin {
+//        modules(
+//            appModule,
+//        )
+//    }
+//
+//    runExample(KoinPlatform.getKoin())
+//}
+//
 
-    val idGen = KoinPlatform.getKoin().get<IdGenerator> { parametersOf("_prefix_") }.generate()
-    println("Id => $idGen")
+val diConfig = koinConfiguration {
+    modules(appModule)
 }

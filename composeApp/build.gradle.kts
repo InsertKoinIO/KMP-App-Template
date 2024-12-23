@@ -52,9 +52,10 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.kamel)
+
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-            implementation(libs.koin.compose.viewmodel.nav)
 //            api(libs.koin.annotations)
             implementation(libs.navigation.compose)
         }

@@ -1,12 +1,12 @@
 [versions]
 agp = "8.2.2"
 androidx-activityCompose = "1.9.3"
-androidx-ui-tooling = "1.7.5"
+androidx-ui-tooling = "1.7.6"
 compose-plugin = "1.7.1"
 kamel = "0.9.4"
-koin = "4.0.1-Beta2"
+koin = "4.1.0-Beta3"
 #koin-annotations = "2.0.0-Beta2"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 ktor = "2.3.12"
 navigationCompose = "2.8.0-alpha10"
 #ksp = "2.0.21-1.0.28"
@@ -18,8 +18,8 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
-koin-compose-viewmodel-nav = { module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin" }
 
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
