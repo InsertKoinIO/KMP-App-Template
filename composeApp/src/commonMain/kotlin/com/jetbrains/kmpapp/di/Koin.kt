@@ -15,10 +15,13 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Factory
 import org.koin.core.annotation.Module
+import org.koin.core.annotation.Provided
 import org.koin.core.annotation.Single
 import org.koin.core.context.startKoin
 import org.koin.core.parameter.parametersOf
+import org.koin.core.scope.Scope
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.ksp.generated.*
 import org.koin.mp.KoinPlatform
@@ -47,7 +50,11 @@ class ViewModelModule
 class AppModule
 
 @Module
-expect class NativeModule()
+expect class NativeModule() {
+
+    @Factory
+    fun nativeComponent(scope : Scope) : PlatformComponent
+}
 
 fun initKoin(config : KoinAppDeclaration ?= null) {
     startKoin {
