@@ -50,11 +50,8 @@ class ViewModelModule
 class AppModule
 
 @Module
-expect class NativeModule() {
-
-    @Factory
-    fun nativeComponent(scope : Scope) : PlatformComponent
-}
+@ComponentScan("com.jetbrains.kmpapp.native")
+expect class NativeModule()
 
 fun initKoin(config : KoinAppDeclaration ?= null) {
     startKoin {
